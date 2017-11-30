@@ -1,1 +1,1 @@
-# Programmerings-prosjekt 110 Gutta IS-202
+# Programmerings-prosjekt, 110 Gutta, IS-202
