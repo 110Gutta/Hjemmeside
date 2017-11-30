@@ -36,6 +36,10 @@
         <servlet-name>ModulCreate</servlet-name>
         <servlet-class>Servlet.ModulCreate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServ</servlet-name>
+        <servlet-class>Servlet.LoginServ</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>ModulCreate</servlet-name>
         <url-pattern>/ModulCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServ</servlet-name>
+        <url-pattern>/LoginServ</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

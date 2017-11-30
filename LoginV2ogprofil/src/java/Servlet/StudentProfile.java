@@ -56,7 +56,7 @@ public class StudentProfile extends HttpServlet {
                
                 out.println("<nav id= \"nav\">");
                 out.println("<p><h3>Modul</h3></p>");
-                out.format("<a href='Modul1'>Modul 1</a></p>");
+                out.format("<a href='delivery.jsp'>Modul 1</a></p>");
                 out.format("<a href=''>Modul 2</a></p>");
                 out.format("<a href=''>Modul 3</a></p>");
                 out.format("<a href=''>Modul 4</a></p>");

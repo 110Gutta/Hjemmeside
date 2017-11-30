@@ -1,32 +1,29 @@
-package Servlet;
- 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- 
+package Servlets;
+
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Java.DataBase;
-import javax.servlet.RequestDispatcher;
- 
- 
+import Utils.Constants;
+
 /**
  *
  * @author nilsf
  */
-public class Login extends HttpServlet {
+public class DownloadServ extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,48 +36,32 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-           
-            DataBase db = new DataBase();
-            Connection con = db.getCon();
-            Statement st = con.createStatement();
-           
-            String SQL = "SELECT email,pass from User where email='"+email+"'and pass='"+password+"'";
-            ResultSet rs = st.executeQuery(SQL);
-           
-           
-            
-        if(rs.next()) {
-            //response.sendRedirect("StudentProfile");
-            // Sender emailen til studentprofil siden
-            request.setAttribute("loginEmail", email);
-            RequestDispatcher rd = request.getRequestDispatcher("StudentProfile");
-            rd.forward(request,response);
-            
-            } else {
-                out.println("Wrong username or password");
-                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-                rd.forward(request, response);
-                
+      String fileName = request.getParameter("f"); 
+        OutputStream out = null;
+        FileInputStream in = null;
+        try{
+        File file = new File(Constants.filesPath+"/"+fileName);
+        String mimeType = Files.probeContentType(Paths.get(Constants.filesPath+"/"+fileName));
+        response.setContentType(mimeType != null? mimeType:"application/octet-stream");
+        response.setContentLength((int) file.length());
+        out = response.getOutputStream();
+        in = new FileInputStream(file);
+        byte[] buffer = new byte[4096];
+        int length;
+        while ((length = in.read(buffer)) > 0){
+        out.write(buffer, 0, length);
+        }
+        }catch(Exception e){}
+        finally{
+            if(in != null){
+            in.close();
             }
-            
-        
-           //st.executeUpdate("insert into user (name,pass) values('"+username+"','"+password+"')");
-           
-           // out.println("everything is fine, data is inserted");
-           
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            if(out != null){
+            out.flush();
+            }
         }
-       
-       
-        }
-   
-   
- 
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -95,7 +76,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
- 
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -109,7 +90,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
- 
+
     /**
      * Returns a short description of the servlet.
      *
@@ -119,5 +100,6 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
- 
+
 }
+

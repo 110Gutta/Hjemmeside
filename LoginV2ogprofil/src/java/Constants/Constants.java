@@ -78,4 +78,8 @@ public interface Constants
     String STUDENT_LIST_ATTR = "studentlist";
     String CURRENT_MODULE_STATUS = "currentmodule";
     String WAITING_STUDENTS = "waitingstudents";
+
+
+
+
 }
