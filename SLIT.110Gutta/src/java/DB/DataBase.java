@@ -26,7 +26,7 @@ public class DataBase {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root","root");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slit","root","root");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
