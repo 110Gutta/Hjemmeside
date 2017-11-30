@@ -24,7 +24,7 @@ public class DataBase {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/is-202","root","bjerk7412395");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root","root");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
