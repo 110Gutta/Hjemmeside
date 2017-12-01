@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Constants.Constants;
  
 /**
  *
@@ -37,7 +38,13 @@ public class Register extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+    
+        DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+       
+    
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,15 +56,15 @@ public class Register extends HttpServlet {
             String adminkode = request.getParameter("adminkode");
          
            
-            DataBase db = new DataBase();
-            Connection con = db.getCon();
-            Statement st = con.createStatement();
-            String adminpw = "123";
-           
-           
+            
+            con = db.getCon();
+            st = con.createStatement();
+            
+            String adminpw = Constants.adminPWD;
+            
             String SQL = "SELECT email from Bruker where email='"+email+"'";
            
-            ResultSet rs = st.executeQuery(SQL);
+            rs = st.executeQuery(SQL);
             if (adminkode.equals(adminpw)){
 
             }

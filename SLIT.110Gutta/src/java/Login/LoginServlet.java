@@ -1,7 +1,7 @@
 package Login;
-
+ 
 import DB.DataBase;
-import javax.servlet.http.HttpSession; 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -14,30 +14,38 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+ 
+ 
+ 
 public class LoginServlet extends HttpServlet {  
+    DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+   
     protected void doPost(HttpServletRequest request, HttpServletResponse response)  
                     throws ServletException, IOException {  
         response.setContentType("text/html");  
         try (PrintWriter out = response.getWriter()) {
             request.getRequestDispatcher("link.html").include(request, response);
-            
+           
             String email=request.getParameter("email");
-            String password=request.getParameter("password");
-            
-            DataBase db = new DataBase();
-            Connection con = db.getCon();
-            Statement st = con.createStatement();
-            
-            String SQL = "SELECT email,pass from user where email='"+email+"'and pass='"+password+"'";
-            
-            ResultSet rs = st.executeQuery(SQL);
-            
+            String passord=request.getParameter("passord");
+           
+           
+            con = db.getCon();
+            st = con.createStatement();
+           
+            String SQL = "SELECT email,passord from bruker where email='"+email+"'and passord='"+passord+"'";
+           
+            rs = st.executeQuery(SQL);
+           
             if (rs.next()) {
-                
-                out.print("Welcome, "+email);
+               
+                //out.print("Welcome, "+email);
                 HttpSession session=request.getSession();
                 session.setAttribute("email",email);
+               response.sendRedirect("ProfileServlet");
             }
             else{
                 out.print("Sorry, username or password error!");
@@ -47,4 +55,4 @@ public class LoginServlet extends HttpServlet {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }  
-}  
+}
