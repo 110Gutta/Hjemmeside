@@ -15,7 +15,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 public class LoginServlet extends HttpServlet {  
+    DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)  
                     throws ServletException, IOException {  
         response.setContentType("text/html");  
@@ -23,21 +30,23 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("link.html").include(request, response);
             
             String email=request.getParameter("email");
-            String password=request.getParameter("password");
+            String passord=request.getParameter("pw1");
             
-            DataBase db = new DataBase();
-            Connection con = db.getCon();
-            Statement st = con.createStatement();
             
-            String SQL = "SELECT email,pass from user where email='"+email+"'and pass='"+password+"'";
+           
+            con = db.getCon();
+            st = con.createStatement();
             
-            ResultSet rs = st.executeQuery(SQL);
+            String SQL = "SELECT email,passord from bruker where email='"+email+"'and passord='"+passord+"'";
+            
+            rs = st.executeQuery(SQL);
             
             if (rs.next()) {
                 
                 out.print("Welcome, "+email);
                 HttpSession session=request.getSession();
                 session.setAttribute("email",email);
+                response.sendRedirect("studentProfil.jsp");
             }
             else{
                 out.print("Sorry, username or password error!");

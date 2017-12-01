@@ -45,15 +45,17 @@ public class Register extends HttpServlet {
         Statement st = null;
         ResultSet rs = null;
        
+        String adminpw = Constants.adminPWD;
     
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String fornavn = request.getParameter("fornavn");
-            String etternavn = request.getParameter("etternavn");
-            String email = request.getParameter("email");
-            String passord = request.getParameter("passord");
+            String etternavn = request.getParameter("etternavn").trim();
+            String email = request.getParameter("email").trim();
+            String pw1 = request.getParameter("pw1");
+            String pw2 = request.getParameter("pw2");
             String adminkode = request.getParameter("adminkode");
          
            
@@ -61,36 +63,24 @@ public class Register extends HttpServlet {
             con = db.getCon();
             st = con.createStatement();
             
-            String adminpw = Constants.adminPWD;
+            
             
             String SQL = "SELECT email from Bruker where email='"+email+"'";
            
             rs = st.executeQuery(SQL);
-            if (adminkode.equals(adminpw)){
-
-            }
            
-            if(!rs.next()) {
+            if(pw1.equals(pw2) && !rs.next()) {
                 if(adminkode.equals(adminpw)){
-                st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+passord+"', 1)");
-                out.println("You have sucsessfully been registered in the system");
+                st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+pw1+"', 1)");
+                out.println("You have sucsessfully been registered as a teacher in the system");
                 }else if(!(adminkode.equals(adminpw))){
-                    st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+passord+"', 2)");
+                    st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+pw1+"', 2)");
                     out.println("You have sucsessfully been registered in the system");
                 }
             } else {
-                out.println("The ID is already registered");
+                out.println("The email is already registered or passwords not matching");
             }
-           
-           
-                 
-           
-           
-           
         }
-       
-       
-       
      }
  
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
