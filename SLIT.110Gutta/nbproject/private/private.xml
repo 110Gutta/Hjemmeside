@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/src/java/Moduler/FileUploadDBServlet.java</file>
-            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/web/studentProfil.jsp</file>
-            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/web/upload.jsp</file>
-            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/src/java/Login/LoginServlet.java</file>
+            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/src/java/Moduler/DownloadServletV2.java</file>
+            <file>file:/C:/Users/nilsf/Desktop/Slitv2%20backup/SLIT.110Gutta/web/Download.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -78,6 +78,12 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </table>\n");
       out.write("        </form>\n");
       out.write("        \n");
+      out.write("        <td><a target=\"_blank\" href=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/download?f=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${assignment.id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(".docx\">\n");
+      out.write("        \n");
       out.write("        <a href=\"Profile.jsp\">go to site</a>\n");
       out.write("    </center>\n");
       out.write("</body>\n");

@@ -13,6 +13,7 @@ public interface Constants {
     
     //Admin password
     public static String adminPWD = "123";
+    public static final String filesPath = System.getProperty("user.home");
     
  
 }
