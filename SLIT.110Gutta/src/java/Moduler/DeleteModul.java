@@ -19,7 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -39,8 +39,6 @@ public class DeleteModul extends HttpServlet {
     
         DataBase db = new DataBase();
         Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
         PreparedStatement pst = null;
         
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
