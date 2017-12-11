@@ -35,14 +35,14 @@ public class ProfileServlet extends HttpServlet {
                 con = db.getCon();
                 st = con.createStatement();
                 
-                String SQL = "SELECT fornavn, etternavn from bruker where email='"+email+"'";
+                String SQL = "SELECT fornavn, etternavn, email from bruker where email='"+email+"'";
                 
                 rs = st.executeQuery(SQL);
                     
                     if (rs.next()){
                     String fornavn = rs.getString("fornavn");
                     String etternavn = rs.getString("etternavn");
-                    out.print(fornavn + " " + etternavn);
+                    out.print(fornavn + " " + etternavn + " " + email);
                     }
                 }
                 else{
