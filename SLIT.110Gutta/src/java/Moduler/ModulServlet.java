@@ -50,7 +50,7 @@ public class ModulServlet extends HttpServlet {
             con = db.getCon();
             st = con.createStatement();
             
-            String SQLhentModul = ("SELECT modulName, modulLaeringsmaal, modulTekst from Modul where modulID = 1;");
+            String SQLhentModul = ("SELECT modulName, modulLaeringsmaal, modulTekst from Modul");
             
             rs = st.executeQuery(SQLhentModul);
             

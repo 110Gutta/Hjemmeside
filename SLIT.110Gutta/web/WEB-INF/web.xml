@@ -24,6 +24,14 @@
         <servlet-name>PrintUtStudenter</servlet-name>
         <servlet-class>Foreleser.PrintUtStudenter</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>Upload.Upload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeliverModuleStudent</servlet-name>
+        <servlet-class>Moduler.DeliverModuleStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>PrintUtStudenter</servlet-name>
         <url-pattern>/PrintUtStudenter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeliverModuleStudent</servlet-name>
+        <url-pattern>/DeliverModuleStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

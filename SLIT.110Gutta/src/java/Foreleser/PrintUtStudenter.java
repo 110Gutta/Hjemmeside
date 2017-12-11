@@ -35,7 +35,7 @@ public class PrintUtStudenter extends HttpServlet {
             
             con = db.getCon();
             st = con.createStatement();
-            String SQLTEST = "SELECT fornavn, etternavn, email from bruker";
+            String SQLTEST = "SELECT fornavn, etternavn from bruker";
             rs = st.executeQuery(SQLTEST);
 
 
