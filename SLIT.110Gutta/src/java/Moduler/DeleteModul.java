@@ -1,17 +1,15 @@
-package Servlets;
- 
- 
- 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- 
+package Moduler;
+
 import DB.DataBase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,15 +19,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Constants.Constants;
-import java.sql.PreparedStatement;
- 
+import javax.servlet.http.HttpSession;
+
 /**
  *
- * @author Mats
+ * @author nilsf
  */
-public class RegisterServlet extends HttpServlet {
- 
+public class DeleteModul extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,45 +41,38 @@ public class RegisterServlet extends HttpServlet {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
-       
-        String adminpw = Constants.adminPWD;
-    
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+        PreparedStatement pst = null;
+        
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String fornavn = request.getParameter("fornavn");
-            String etternavn = request.getParameter("etternavn").trim();
-            String email = request.getParameter("email").trim();
-            String pw1 = request.getParameter("pw1");
-            String pw2 = request.getParameter("pw2");
-            String adminkode = request.getParameter("adminkode");
-         
-           
             
-            con = db.getCon();
-            st = con.createStatement();
+            String ID = request.getParameter("id");
             
+                con = db.getCon();
+
             
+            String SQL= "DELETE FROM modul WHERE modul_ID = ?";
+            pst = con.prepareStatement(SQL);          
+            pst.setString(1, ID);
             
-            String SQL = "SELECT email from Bruker where email='"+email+"'";
-           
-            rs = st.executeQuery(SQL);
-           
-            if(pw1.equals(pw2) && !rs.next()) {
-                if(adminkode.equals(adminpw)){
-                st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+pw1+"', 1)");
-                out.println("You have sucsessfully been registered as a teacher in the system");
-                }else if(!(adminkode.equals(adminpw))){
-                    st.executeUpdate("insert into Bruker (forNavn, etterNavn, email, passord, adminID) values('"+fornavn+"','"+etternavn+"','"+email+"','"+pw1+"', 2)");
-                    out.println("You have sucsessfully been registered in the system");
-                }
-            } else {
-                out.println("The email is already registered or passwords not matching");
-            }
+        int i=pst.executeUpdate();
+        if(i!=0)
+        {
+            out.println("Modul med id "+ID+ " har blitt slettet.");
         }
-     }
- 
+        else if(i==0)
+        {
+            out.print("Beklager, modulen ble ikke funnet i systemet");
+        }
+            
+        
+    }       catch (SQLException ex) {
+                Logger.getLogger(DeleteModul.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -95,13 +85,9 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             processRequest(request, response);
-         } catch (SQLException ex) {
-             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        processRequest(request, response);
     }
- 
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -113,13 +99,9 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             processRequest(request, response);
-         } catch (SQLException ex) {
-             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        processRequest(request, response);
     }
- 
+
     /**
      * Returns a short description of the servlet.
      *
@@ -129,5 +111,5 @@ public class RegisterServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
- 
+
 }

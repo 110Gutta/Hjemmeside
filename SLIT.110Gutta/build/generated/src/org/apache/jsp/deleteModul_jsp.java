@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class Download_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class deleteModul_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -70,10 +70,10 @@ public final class Download_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t<article class=\"post\">\n");
       out.write("\t\t\t<h2>Enter your information</h2>\n");
       out.write("            <div class=\"form\">\n");
-      out.write("                <form action=\"DownloadServletV2\" method=\"POST\" >\n");
+      out.write("                <form action=\"DeleteModul\" method=\"POST\" >\n");
       out.write("                ModulNr: <input type=\"text\" placeholder=\"modul nr\" name=\"id\" ></br>\n");
       out.write("           \n");
-      out.write("                <input type=\"submit\" value=\"Download\" ></br>\n");
+      out.write("                <input type=\"submit\" value=\"Slett\" ></br>\n");
       out.write("                \n");
       out.write("               \n");
       out.write("            </div>\n");

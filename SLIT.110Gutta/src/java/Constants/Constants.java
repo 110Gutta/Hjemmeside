@@ -15,5 +15,11 @@ public interface Constants {
     public static String adminPWD = "123";
     public static final String filesPath = System.getProperty("user.home");
     
+    
+    //////////////////////////////////////////////
+    /////////            SQL            /////////
+    public static String sqlWriteStudent = "SELECT fornavn, etternavn, email from bruker";
+ 
+    
  
 }
