@@ -12,6 +12,10 @@
         <h1>File Upload to Image</h1>
         <form method="post" action="FileUploadDBServlet" enctype="multipart/form-data">
             <table border="0">
+                 <tr>
+                    <td>Modul ID: </td>
+                    <td><input type="text" name="moduleid" size="50"/></td>
+                </tr>
                 <tr>
                     <td>Modul name: </td>
                     <td><input type="text" name="modulName" size="50"/></td>

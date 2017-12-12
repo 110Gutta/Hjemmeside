@@ -54,6 +54,10 @@ public final class uploadTeacher_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <h1>File Upload to Image</h1>\n");
       out.write("        <form method=\"post\" action=\"FileUploadDBServlet\" enctype=\"multipart/form-data\">\n");
       out.write("            <table border=\"0\">\n");
+      out.write("                 <tr>\n");
+      out.write("                    <td>Modul ID: </td>\n");
+      out.write("                    <td><input type=\"text\" name=\"moduleid\" size=\"50\"/></td>\n");
+      out.write("                </tr>\n");
       out.write("                <tr>\n");
       out.write("                    <td>Modul name: </td>\n");
       out.write("                    <td><input type=\"text\" name=\"modulName\" size=\"50\"/></td>\n");

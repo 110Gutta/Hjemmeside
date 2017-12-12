@@ -50,6 +50,7 @@ public class FileUploadDBServlet extends HttpServlet {
         String modulName = request.getParameter("modulName");
         String modulGoals = request.getParameter("modulgoals");
         String modulText = request.getParameter("modulText");
+        String moduleid = request.getParameter("moduleid");
        
         InputStream inputStream = null; // input stream of the upload file
        
@@ -72,6 +73,7 @@ public class FileUploadDBServlet extends HttpServlet {
             pst.setString(1, modulName);
             pst.setString(2, modulGoals);
             pst.setString(3, modulText);
+            pst.setString(5, moduleid);
             
            
             if (inputStream != null) {

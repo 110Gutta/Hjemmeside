@@ -21,7 +21,7 @@ public interface Constants {
     public static String sqlWriteStudent = "SELECT firstname, lastname, email from User";
     public static String sqlDeleteUser = "DELETE FROM User WHERE firstname = ? AND lastname = ?";
     public static String sqlSelectModule = "SELECT modulename, learninggoals, moduletext from Module";
-    public static String sqlInsertIntoModule = "INSERT INTO module (modulename, learninggoals, moduletext, modulefile) values (?, ?, ?, ?)";
+    public static String sqlInsertIntoModule = "INSERT INTO module (modulename, learninggoals, moduletext, modulefile, moduleid) values (?, ?, ?, ?,?)";
     public static String sqlSelectAllFromMuduleID = "SELECT * FROM module WHERE modueid = ?";
     public static String sqlInsertInnlevering = "INSERT INTO Delivery (email, modueid, deliveryfile) values (?, ?, ?)";
     public static String sqlDeleteModule = "DELETE FROM module WHERE moduleid = ?";
