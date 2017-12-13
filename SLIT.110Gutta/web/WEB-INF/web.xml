@@ -2,11 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>Login.LoginServlet</servlet-class>
+        <servlet-class>User.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>Login.LogoutServlet</servlet-class>
+        <servlet-class>User.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
@@ -18,19 +18,43 @@
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>RegistrerBruker.Register</servlet-class>
+        <servlet-class>User.RegisterServletDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FileUploadDBServlet</servlet-name>
+        <servlet-class>Moduler.FileUploadDBServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadServlet</servlet-name>
+        <servlet-class>Moduler.DownloadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadServletV2</servlet-name>
+        <servlet-class>Moduler.DownloadServletV2</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PrintUtStudenter</servlet-name>
         <servlet-class>Foreleser.PrintUtStudenter</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Upload</servlet-name>
-        <servlet-class>Upload.Upload</servlet-class>
+        <servlet-name>DeleteModul</servlet-name>
+        <servlet-class>Moduler.DeleteModul</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>User.DeleteUserServletDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeliverModuleStudent</servlet-name>
         <servlet-class>Moduler.DeliverModuleStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModulServlet</servlet-name>
+        <servlet-class>Moduler.ModulServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Download</servlet-name>
+        <servlet-class>Moduler.Download</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -53,16 +77,40 @@
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>FileUploadDBServlet</servlet-name>
+        <url-pattern>/FileUploadDBServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServlet</servlet-name>
+        <url-pattern>/DownloadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadServletV2</servlet-name>
+        <url-pattern>/DownloadServletV2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PrintUtStudenter</servlet-name>
         <url-pattern>/PrintUtStudenter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Upload</servlet-name>
-        <url-pattern>/Upload</url-pattern>
+        <servlet-name>DeleteModul</servlet-name>
+        <url-pattern>/DeleteModul</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeliverModuleStudent</servlet-name>
         <url-pattern>/DeliverModuleStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModulServlet</servlet-name>
+        <url-pattern>/ModulServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Download</servlet-name>
+        <url-pattern>/Download</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

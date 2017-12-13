@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class Upload_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -52,7 +52,7 @@ public final class Upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<body>\n");
       out.write("    <center>\n");
       out.write("        <h1>File Upload to Image</h1>\n");
-      out.write("        <form method=\"post\" action=\"Upload\" enctype=\"multipart/form-data\">\n");
+      out.write("        <form method=\"post\" action=\"FileUploadDBServlet\" enctype=\"multipart/form-data\">\n");
       out.write("            <table border=\"0\">\n");
       out.write("                <tr>\n");
       out.write("                    <td>Modul name: </td>\n");
@@ -60,7 +60,7 @@ public final class Upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </tr>\n");
       out.write("                <tr>\n");
       out.write("                    <td>Modul goals: </td>\n");
-      out.write("                    <td><input type=\"text\" name=\"modulGoals\" size=\"50\"/></td>\n");
+      out.write("                    <td><input type=\"text\" name=\"modulgoals\" size=\"50\"/></td>\n");
       out.write("                </tr>\n");
       out.write("                 <tr>\n");
       out.write("                    <td>Modul beskrivelse: </td>\n");
@@ -77,9 +77,9 @@ public final class Upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </tr>\n");
       out.write("            </table>\n");
       out.write("        </form>\n");
+      out.write("        \n");
       out.write("       \n");
-      out.write("       \n");
-      out.write("       \n");
+      out.write("        \n");
       out.write("        <a href=\"Profile.jsp\">go to site</a>\n");
       out.write("    </center>\n");
       out.write("</body>\n");

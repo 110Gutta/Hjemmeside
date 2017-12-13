@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Constants.Constants;
 
 /**
  *
@@ -44,20 +45,20 @@ public class ModulServlet extends HttpServlet {
 
                 HttpSession session=request.getSession(false);
                 if(session!=null){
-                String email=(String)session.getAttribute("email");
+                //String email=(String)session.getAttribute("email");
                     
                 
             con = db.getCon();
             st = con.createStatement();
             
-            String SQLhentModul = ("SELECT modulName, modulLaeringsmaal, modulTekst from Modul");
+            String SQL = Constants.sqlSelectModule;
             
-            rs = st.executeQuery(SQLhentModul);
+            rs = st.executeQuery(SQL);
             
             if(rs.next()){
-                String moduleName = rs.getString("modulName");
-                String learningGoals = rs.getString("modulLaeringsmaal");
-                String moduleText = rs.getString("modulTekst");
+                String moduleName = rs.getString("modulename");
+                String learningGoals = rs.getString("learninggoals");
+                String moduleText = rs.getString("moduletext");
             
                 out.println(moduleName + "\n");
                 out.println(learningGoals);

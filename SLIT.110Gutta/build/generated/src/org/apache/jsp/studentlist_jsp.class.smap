@@ -1,0 +1,16 @@
+SMAP
+studentlist_jsp.java
+JSP
+*S JSP
+*F
++ 0 studentlist.jsp
+studentlist.jsp
+*L
+5,58:48
+62,2:106
+64,15:108,3
+79,4:153
+84,2:159
+85,12:161
+96,2:173
+*E

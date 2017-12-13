@@ -13,4 +13,18 @@ public interface Constants {
     
     //Admin password
     public static String adminPWD = "123";
+    public static final String filesPath = System.getProperty("user.home");
+    
+    
+    //////////////////////////////////////////////
+    /////////            SQL            /////////
+    public static String sqlWriteStudent = "SELECT firstname, lastname, email from User";
+    public static String sqlDeleteUser = "DELETE FROM User WHERE firstname = ? AND lastname = ?";
+    public static String sqlSelectModule = "SELECT modulename, learninggoals, moduletext from Module";
+    public static String sqlInsertIntoModule = "INSERT INTO module (modulename, learninggoals, moduletext, modulefile, moduleid) values (?, ?, ?, ?,?)";
+    public static String sqlSelectAllFromMuduleID = "SELECT * FROM module WHERE moduleid = ?";
+    public static String sqlInsertInnlevering = "INSERT INTO Delivery (email, moduleid, deliveryfile) values (?, ?, ?)";
+    public static String sqlDeleteModule = "DELETE FROM module WHERE moduleid = ?";
+    
+ 
 }

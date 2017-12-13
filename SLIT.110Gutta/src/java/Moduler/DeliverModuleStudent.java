@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import Constants.Constants;
  
 /**
  *
@@ -65,7 +66,7 @@ public class DeliverModuleStudent extends HttpServlet {
             con = db.getCon();
            
             // constructs SQL statement
-            String sql = "INSERT INTO Innlevering (email, modulID, innleveringFil) values (?, ?, ?)";
+            String sql = Constants.sqlInsertInnlevering;
             pst = con.prepareStatement(sql);
             pst.setString(1, email);
             pst.setString(2, modulID);

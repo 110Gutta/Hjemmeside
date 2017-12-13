@@ -2,6 +2,7 @@ package Profil;
  
 import DB.DataBase;
 import java.io.IOException;  
+import java.io.InputStream;
 import java.io.PrintWriter;  
 import java.sql.Blob;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ public class ProfileServlet extends HttpServlet {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
+        InputStream inputStream = null;
     
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  
@@ -34,17 +36,20 @@ public class ProfileServlet extends HttpServlet {
                     if(session!=null){
                         String email=(String)session.getAttribute("email");
                         
+                        
                         con = db.getCon();
                         st = con.createStatement();
                         
-                        String SQL = "SELECT Bruker.fornavn, Bruker.etternavn, Bruker.email, Innlevering.innleveringFil from Bruker INNER JOIN Innlevering ON Bruker.email = Innlevering.email where Bruker.email='"+email+"'";
+                        String SQL = "SELECT User.firstname, User.lastname, User.email, Delivery.deliveryfile from User INNER JOIN Delivery ON User.email = Delivery.email where User.email='"+email+"'";
                         
                         rs = st.executeQuery(SQL);
                         
                         if (rs.next()){
-                            String fornavn = rs.getString("fornavn");
-                            String etternavn = rs.getString("etternavn");
-                            Blob fil = rs.getBlob("innleveringFil");
+                            String fornavn = rs.getString("firstname");
+                            String etternavn = rs.getString("lastname");
+                        
+                            Blob fil = rs.getBlob("deliveryfile");
+                            inputStream = fil.getBinaryStream();
                             out.print(fornavn + " " + etternavn + " " + email + fil);
                         }
                     }

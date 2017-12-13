@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Constants.Constants;
 
 /**
  *
@@ -35,16 +36,16 @@ public class PrintUtStudenter extends HttpServlet {
             
             con = db.getCon();
             st = con.createStatement();
-            String SQLTEST = "SELECT fornavn, etternavn from bruker";
-            rs = st.executeQuery(SQLTEST);
+            String SQL = Constants.sqlWriteStudent;
+            rs = st.executeQuery(SQL);
 
 
       //STEP 5: Extract data from result set
       while(rs.next()){
          //Retrieve by column name
          
-         String fornavn = rs.getString("fornavn");
-         String etternavn = rs.getString("etternavn");
+         String fornavn = rs.getString("firstname");
+         String etternavn = rs.getString("lastname");
 
          //Display values
 

@@ -8,11 +8,14 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"                                                    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8"/>
+<title> SLIT-Project </title>
+<meta name="viewport" content="width=device-width, minimumscale=
+     1.0, maximum-scale=1.0" />
+  
 <title>Students</title>
 </head>
 <body>
@@ -27,7 +30,18 @@
 <td>Fornavn</td>
 <td>Etternavn</td>
 <td>Email</td>
-<td>Modul</td>
+<td>Modul 1</td>
+<td>Modul 2</td>
+<td>Modul 3</td>
+<td>Modul 4</td>
+<td>Modul 5</td>
+<td>Modul 6</td>
+<td>Modul 7</td>
+<td>Modul 8</td>
+<td>Modul 9</td>
+<td>Modul 10</td>
+<td>Modul 11</td>
+<td>Modul 12</td>
  
  
 </tr>
@@ -35,9 +49,9 @@
 try
 {
 Class.forName("com.mysql.jdbc.Driver");
-String url="jdbc:mysql://localhost:3306/slit";
+String url="jdbc:mysql://localhost:3306/prog";
 String username="root";
-String password="root";
+String password="bjerk7412395";
 String query="SELECT * FROM bruker";
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
@@ -50,7 +64,20 @@ while(rs.next())
 <td><%=rs.getString("forNavn") %></td>
 <td><%=rs.getString("etterNavn") %></td>
 <td><%=rs.getString("email") %></td>
-<td><%=rs.getBlob("modul") %></td>
+<td><%=rs.getBlob(4).toString() %></td>
+<td><%=rs.getBlob(6) %></td>
+<td><%=rs.getBlob(8) %></td>
+<td><%=rs.getBlob("modul 4") %></td>
+<td><%=rs.getBlob("modul 5") %></td>
+<td><%=rs.getBlob("modul 6") %></td>
+<td><%=rs.getBlob("modul 7") %></td>
+<td><%=rs.getBlob("modul 8") %></td>
+<td><%=rs.getBlob("modul 9") %></td>
+<td><%=rs.getBlob("modul 10") %></td>
+<td><%=rs.getBlob("modul 11") %></td>
+<td><%=rs.getBlob("modul 12") %></td>
+
+
 </tr>
  <%
  
