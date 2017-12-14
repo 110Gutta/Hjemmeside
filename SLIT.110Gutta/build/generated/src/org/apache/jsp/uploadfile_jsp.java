@@ -1,31 +1,81 @@
-<%--
-    Document   : uploadfile2
-    Created on : Dec 13, 2017, 3:42:00 PM
-    Author     : nilsf
---%>
- 
+package org.apache.jsp;
 
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.io.InputStream"%>
-<%@page import="DB.DataBase"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.io.FileInputStream"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="java.io.File"%>
- 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        upload file page...!!!
-        <%
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.io.InputStream;
+import DB.DataBase;
+import java.sql.PreparedStatement;
+import java.io.FileInputStream;
+import java.util.Enumeration;
+import com.oreilly.servlet.MultipartRequest;
+import java.io.File;
+
+public final class uploadfile_jsp extends org.apache.jasper.runtime.HttpJspBase
+    implements org.apache.jasper.runtime.JspSourceDependent {
+
+  private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
+
+  private static java.util.List<String> _jspx_dependants;
+
+  private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
+
+  public java.util.List<String> getDependants() {
+    return _jspx_dependants;
+  }
+
+  public void _jspService(HttpServletRequest request, HttpServletResponse response)
+        throws java.io.IOException, ServletException {
+
+    PageContext pageContext = null;
+    HttpSession session = null;
+    ServletContext application = null;
+    ServletConfig config = null;
+    JspWriter out = null;
+    Object page = this;
+    JspWriter _jspx_out = null;
+    PageContext _jspx_page_context = null;
+
+    try {
+      response.setContentType("text/html;charset=UTF-8");
+      pageContext = _jspxFactory.getPageContext(this, request, response,
+      			null, true, 8192, true);
+      _jspx_page_context = pageContext;
+      application = pageContext.getServletContext();
+      config = pageContext.getServletConfig();
+      session = pageContext.getSession();
+      out = pageContext.getOut();
+      _jspx_out = out;
+      _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
+
+      out.write("\n");
+      out.write(" \n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write(" \n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
+      out.write("        <title>JSP Page</title>\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("        upload file page...!!!\n");
+      out.write("        ");
+
             String rtempfile = File.createTempFile("temp","1").getParent();            
             MultipartRequest multi = new MultipartRequest(request,rtempfile, 15*1024*1024);     // maximum size 15 MB
            
@@ -33,7 +83,7 @@
             
             session = request.getSession(false);
                     if(session!=null){
-            String userid = (String)session.getAttribute("userid");
+            int userid = (Integer)session.getAttribute("userid");
             
             
             DataBase db = new DataBase();        
@@ -79,7 +129,7 @@
                                 
                                 
                                     fin=new FileInputStream(ff);
-                                    psmt.setString(1, userid);
+                                    psmt.setInt(1, userid);
                                     psmt.setString(2, moduleid);
                                     psmt.setString(3, ff.getName());
                                     psmt.setString(4, fileExtesion);
@@ -112,7 +162,21 @@
                                            
             con.close();
                     }
-        %>
-        <a href="uploadhtml.jsp">Home Page</a>
-    </body>
-</html>
+        
+      out.write("\n");
+      out.write("        <a href=\"uploadhtml.jsp\">Home Page</a>\n");
+      out.write("    </body>\n");
+      out.write("</html>");
+    } catch (Throwable t) {
+      if (!(t instanceof SkipPageException)){
+        out = _jspx_out;
+        if (out != null && out.getBufferSize() != 0)
+          out.clearBuffer();
+        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+        else throw new ServletException(t);
+      }
+    } finally {
+      _jspxFactory.releasePageContext(_jspx_page_context);
+    }
+  }
+}

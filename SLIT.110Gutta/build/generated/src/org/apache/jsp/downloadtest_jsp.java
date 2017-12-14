@@ -3,12 +3,14 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Connection;
 import DB.DataBase;
 
-public final class downloadfile_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class downloadtest_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -55,14 +57,8 @@ public final class downloadfile_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
-      out.write("<table border=\"1\">\n");
-      out.write("  <tr>\n");
-      out.write("    <th>File Name</th>\n");
-      out.write("    <th>File Type</th>\n");
-      out.write("    <th>Upload Time</th>\n");
-      out.write("    <th>Action</th>\n");
-      out.write("  </tr>\n");
 
+    
         DataBase db = new DataBase();
         Connection con = null;
         Statement st = null;
@@ -70,48 +66,52 @@ public final class downloadfile_jsp extends org.apache.jasper.runtime.HttpJspBas
         
             con = db.getCon();
             st = con.createStatement();
-
-
-session = request.getSession(false);
-                    if(session!=null){
-                        String email=(String)session.getAttribute("email");
-
-        
-        
-  String query = "select moduleid,filename,typefile, uploadtime from Delivery where email = " + email;
+  
+  String moduleid = request.getParameter("moduleid");
+  String query = "select filename, typefile, file from Delivery where moduleid = " + moduleid;
   rs = st.executeQuery(query);
   
   
-  int count =0;
-  while(rs.next())
+  
+  
+  
+  rs.next();
+  
+  // clear the response header information.
+  response.reset();                        
+  // check the file type and set the header contentType accordingly..   
+  if(rs.getString(2)==".txt")
   {
-    out.println("<tr>"
-        + "<td>"+rs.getString(2)+"</td>"
-        + "<td>"+rs.getString(3)+"</td>"
-        + "<td>"+rs.getString(4)+"</td>"
-    //    + "<td>"+rs.getString(5)+"</td>"
-      //  + "<td>"+rs.getString(3)+"</td>"
-     //   + "<td>"+rs.getString(4)+"</td>"
-        + "<td>"
-        + "<a href='downloadtest.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
-        + "</td>"
-        + "</tr>");
-    count++;
+      response.setContentType("application/octet-stream");
   }
+  else if(rs.getString(2)==".pdf")
+  {
+      response.setContentType("application/pdf");
+  }
+  else if((rs.getString(2)==".doc")||rs.getString(2)==".docx")
+  {
+      response.setContentType("application/msword");
+  }
+  else if((rs.getString(2)==".xls")||(rs.getString(2)==".xlsx"))
+  {
+      response.setContentType("application/vnd.ms-excel");
+  }
+  // add header information to response object
+  response.addHeader("Content-Disposition","attachment; filename="+rs.getString(1));
+  // create the byte array from Blob
+  Blob blb = rs.getBlob(3);
+  byte[] bdata = blb.getBytes(1, (int) blb.length());
+  
+  // get the response Output stream object to write the content of the file into header
+  OutputStream output =  response.getOutputStream();
+  output.write(bdata);
+  output.close();
+  // close the obejct of ResultSet
   rs.close();
+  
+  // close the connection object.. 
   con.close();
-  if(count==0)
-  {
-    out.println("<tr><td colspan='4'> No File Found..!! </td></tr>");
-  }
-                    } else{
-                      out.print("Please login first");
-                      request.getRequestDispatcher("login.html").include(request, response);
-                    
-                    }
 
-      out.write("            \n");
-      out.write("</table>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

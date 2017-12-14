@@ -4,6 +4,7 @@
     Author     : nilsf
 --%>
  
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -29,23 +30,33 @@
             MultipartRequest multi = new MultipartRequest(request,rtempfile, 15*1024*1024);     // maximum size 15 MB
            
             Enumeration files = multi.getFileNames();
-                    DataBase db = new DataBase();
+            
+            session = request.getSession(false);
+                    if(session!=null){
+            String userid = (String)session.getAttribute("userid");
+            
+            
+            DataBase db = new DataBase();        
             Connection con = null;
             Statement st = null;
-            ResultSet rs = null;
-        
+
+            // String em = "nils@nils.no";
+            
+            
             con = db.getCon();
             st = con.createStatement();
-           
+
  
-            String SQL="insert into documents(filename, typefile, file) values (?,?,?)";
+            String SQL="insert into Delivery(userid, moduleid, filename, typefile, file) values (?,?,?,?,?)";
             PreparedStatement psmt = con.prepareStatement(SQL);
-           
-                       
+            String moduleid = multi.getParameter("moduleid");
+            out.print(moduleid);
+
             String name="";
             String fileExtesion="";
             File ff =null;
             FileInputStream fin =null;
+            
            
             while (files.hasMoreElements())
             {
@@ -65,10 +76,14 @@
  
                             try
                             {
+                                
+                                
                                     fin=new FileInputStream(ff);
-                                    psmt.setString(1, ff.getName());
-                                    psmt.setString(2, fileExtesion);
-                                    psmt.setBinaryStream(3,(InputStream)fin, (int)(ff.length()));
+                                    psmt.setString(1, userid);
+                                    psmt.setString(2, moduleid);
+                                    psmt.setString(3, ff.getName());
+                                    psmt.setString(4, fileExtesion);
+                                    psmt.setBinaryStream(5,(InputStream)fin, (int)(ff.length()));
                                             // pass the user name or id
                                     boolean sss = psmt.execute();
                                    
@@ -94,9 +109,10 @@
                            out.print("Please select the correct file...");
                     }// end of if and else
             }// end of while
-                                   
-            con.close();            
+                                           
+            con.close();
+                    }
         %>
-        <a href="index2.jsp">Home Page</a>
+        <a href="uploadhtml.jsp">Home Page</a>
     </body>
 </html>

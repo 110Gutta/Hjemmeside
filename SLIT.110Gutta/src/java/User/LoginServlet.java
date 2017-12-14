@@ -31,21 +31,23 @@ public class LoginServlet extends HttpServlet {
             
             String email=request.getParameter("email");
             String passord=request.getParameter("pw1");
+
             
             
            
             con = db.getCon();
             st = con.createStatement();
             
-            String SQL = "SELECT email,password from User where email='"+email+"'and password='"+passord+"'";
+            String SQL = "SELECT userid, email,password from User where email='"+email+"'and password='"+passord+"'";
             
             rs = st.executeQuery(SQL);
             
             if (rs.next()) {
-                
-                out.print("Welcome, "+email);
+                // out.print("Welcome, "+email);
                 HttpSession session=request.getSession();
+                String userid = rs.getString("userid");
                 session.setAttribute("email",email);
+                session.setAttribute("userid",userid);
                 response.sendRedirect("ProfileServlet");
             }
             else{

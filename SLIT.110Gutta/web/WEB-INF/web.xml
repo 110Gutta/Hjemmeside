@@ -56,6 +56,10 @@
         <servlet-name>Download</servlet-name>
         <servlet-class>Moduler.Download</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>tilbakemeldingServlet</servlet-name>
+        <servlet-class>Foreleser.tilbakemeldingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>Download</servlet-name>
         <url-pattern>/Download</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tilbakemeldingServlet</servlet-name>
+        <url-pattern>/tilbakemeldingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

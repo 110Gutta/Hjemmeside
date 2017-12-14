@@ -4,19 +4,21 @@
     Author     : mats, simen & nils
 --%>
 
+
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="DB.DataBase"%>
-<%@page import="Moduler.Download"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <table border="1">
   <tr>
-    <th>File Name</th>
-    <th>File Type</th>
-    <th>Upload Time</th>
-    <th>Action</th>
+    <th>Modulnummer</th>
+    <th>Filnavn</th>
+    <th>Filtype</th>
+    <th>Opplastet</th>
+    <th>Last ned</th>
   </tr>
 <%
         DataBase db = new DataBase();
@@ -27,9 +29,14 @@
             con = db.getCon();
             st = con.createStatement();
 
+
+session = request.getSession(false);
+                    if(session!=null){
+            String userid = (String)session.getAttribute("userid");
+
         
         
-  String query = "select docid,filename,typefile, uploadtime from documents";
+  String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
   rs = st.executeQuery(query);
   
   
@@ -37,6 +44,7 @@
   while(rs.next())
   {
     out.println("<tr>"
+        + "<td>"+rs.getString(1)+"</td>"
         + "<td>"+rs.getString(2)+"</td>"
         + "<td>"+rs.getString(3)+"</td>"
         + "<td>"+rs.getString(4)+"</td>"
@@ -44,7 +52,7 @@
       //  + "<td>"+rs.getString(3)+"</td>"
      //   + "<td>"+rs.getString(4)+"</td>"
         + "<td>"
-        + "<a href='downloadtest.jsp?docid="+rs.getInt(1) +"'> Download </a>"
+        + "<a href='downloadtest.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
         + "</td>"
         + "</tr>");
     count++;
@@ -55,5 +63,10 @@
   {
     out.println("<tr><td colspan='4'> No File Found..!! </td></tr>");
   }
+                    } else{
+                      out.print("Please login first");
+                      request.getRequestDispatcher("login.html").include(request, response);
+                    
+                    }
 %>            
 </table>

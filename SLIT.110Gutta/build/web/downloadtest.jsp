@@ -22,8 +22,8 @@
             con = db.getCon();
             st = con.createStatement();
   
-  String docid = request.getParameter("docid");     
-  String query = "select filename, typefile, file from Documents where docid = " + docid;
+  String moduleid = request.getParameter("moduleid");
+  String query = "select filename, typefile, file from Delivery where moduleid = " + moduleid;
   rs = st.executeQuery(query);
   
   

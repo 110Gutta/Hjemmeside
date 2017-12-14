@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpServletResponse;  
 import javax.servlet.http.HttpSession;  
-public class ProfileServlet extends HttpServlet { 
-    
+public class ProfileServlet extends HttpServlet {
+   
         DataBase db = new DataBase();
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
         InputStream inputStream = null;
-    
+   
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  
                       throws ServletException, IOException {  
@@ -31,26 +31,28 @@ public class ProfileServlet extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = response.getWriter()) {
                     request.getRequestDispatcher("link.html").include(request, response);
-                    
+                   
                     HttpSession session=request.getSession(false);
                     if(session!=null){
-                        String email=(String)session.getAttribute("email");
-                        
-                        
+                        String userid=(String)session.getAttribute("userid");
+                       
+                       
                         con = db.getCon();
                         st = con.createStatement();
-                        
-                        String SQL = "SELECT User.firstname, User.lastname, User.email, Delivery.deliveryfile from User INNER JOIN Delivery ON User.email = Delivery.email where User.email='"+email+"'";
-                        
+                       
+                        String SQL = "SELECT User.firstname, User.lastname, User.email from User where userid = '"+userid+"' "; /** +
+                                     "INNER JOIN Delivery ON User.email = Delivery.email where User.email='"+email+"'";
+                        */
                         rs = st.executeQuery(SQL);
-                        
+                       
                         if (rs.next()){
                             String fornavn = rs.getString("firstname");
                             String etternavn = rs.getString("lastname");
-                        
-                            Blob fil = rs.getBlob("deliveryfile");
-                            inputStream = fil.getBinaryStream();
-                            out.print(fornavn + " " + etternavn + " " + email + fil);
+                            String email = rs.getString("email");
+                       
+                            //Blob fil = rs.getBlob("deliveryfile");
+                            //inputStream = fil.getBinaryStream();
+                            out.print(fornavn + " " + etternavn + " " + email);
                         }
                     }
                     else{
