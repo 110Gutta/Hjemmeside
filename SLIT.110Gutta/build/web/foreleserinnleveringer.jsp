@@ -19,6 +19,7 @@
     <th>Filtype</th>
     <th>Opplastet</th>
     <th>Last ned</th>
+    <th>Gi tilbakemelding</th>
   </tr>
 <%
         DataBase db = new DataBase();
@@ -38,7 +39,7 @@ session = request.getSession(false);
   String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
   rs = st.executeQuery(query);
   
-  
+
   int count =0;
   while(rs.next())
   {
@@ -48,8 +49,12 @@ session = request.getSession(false);
         + "<td>"+rs.getString(3)+"</td>"
         + "<td>"+rs.getString(4)+"</td>"
         + "<td>"
-        + "<a href='download.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
+        + "<a href='download.jsp?moduleid="+rs.getInt(1) +"' > Download </a>"
         + "</td>"
+        + "<td>"
+        + "<a href='tilbakemeldingForeleser.jsp?moduleid="+rs.getInt(1)+"&userid="+userid+"  ' > Gi tilbakemelding </a>"
+        + "</td>"
+                
         + "</tr>");
     count++;
   }

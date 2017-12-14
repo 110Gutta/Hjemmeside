@@ -25,6 +25,7 @@ public interface Constants {
     public static String sqlSelectAllFromMuduleID = "SELECT * FROM module WHERE moduleid = ?";
     public static String sqlInsertInnlevering = "INSERT INTO Delivery (email, moduleid, deliveryfile) values (?, ?, ?)";
     public static String sqlDeleteModule = "DELETE FROM module WHERE moduleid = ?";
-    public static String sqlSelectFeedback = "INSERT INTO module (moduleid, score, email)";
+    public static String sqlSelectFeedback = "INSERT INTO module (score)";
+    public static String sqlInsertIntoFeedback = "INSERT INTO Feedback (userid, moduleid, deliveryfile, score) values (?,?,?,?)";
  
 }

@@ -7,9 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Connection;
 import DB.DataBase;
-import java.sql.PreparedStatement;
 
-public final class tilbakemeldingForeleser_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class foreleserinnleveringer_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -52,32 +51,70 @@ public final class tilbakemeldingForeleser_jsp extends org.apache.jasper.runtime
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
-      out.write("<!--\n");
-      out.write("To change this license header, choose License Headers in Project Properties.\n");
-      out.write("To change this template file, choose Tools | Templates\n");
-      out.write("and open the template in the editor.\n");
-      out.write("-->\n");
-      out.write("\n");
-      out.write("<html>\n");
-      out.write("<form action=\"Tilbakemelding method=\"post\">  \n");
-      out.write("Score:<input type=\"text\" name=\"score\"><br>\n");
-      out.write("Feedback:<input type=\"text\" name=\"deliveryfeedback\"><br>\n");
-      out.write("\n");
-      out.write("<input type=\"submit\" value=\"Give feedback\">\n");
-      out.write("\n");
+      out.write("<table border=\"1\">\n");
+      out.write("  <tr>\n");
+      out.write("    <th>Modulnummer</th>\n");
+      out.write("    <th>Filnavn</th>\n");
+      out.write("    <th>Filtype</th>\n");
+      out.write("    <th>Opplastet</th>\n");
+      out.write("    <th>Last ned</th>\n");
+      out.write("    <th>Gi tilbakemelding</th>\n");
+      out.write("  </tr>\n");
 
-          
+        DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        
+            con = db.getCon();
+            st = con.createStatement();
 
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<p><a href=\"studentlist.jsp\">Back to students</a></p>\n");
-      out.write("\n");
-      out.write("</form>  \n");
-      out.write("</html>");
+session = request.getSession(false);
+                    if(session!=null){
+ 
+        
+        String userid = request.getParameter("userid");
+  String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
+  rs = st.executeQuery(query);
+  
+  
+  int count =0;
+  while(rs.next())
+  {
+    out.println("<tr>"
+        + "<td>"+rs.getString(1)+"</td>"
+        + "<td>"+rs.getString(2)+"</td>"
+        + "<td>"+rs.getString(3)+"</td>"
+        + "<td>"+rs.getString(4)+"</td>"
+        + "<td>"
+        + "<a href='download.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
+        + "</td>"
+        + "<td>"
+        + "<a href='tilbakemeldingForeleser.jsp?moduleid="+rs.getInt(1) +"'> Gi tilbakemelding </a>"
+        + "</td>"
+                
+        + "</tr>");
+    count++;
+  }
+  rs.close();
+  con.close();
+  if(count==0)
+  {
+    out.println("<tr><td colspan='4'> No File Found..!! </td></tr>");
+  }
+                    } else{
+                      out.print("Please login first");
+                      request.getRequestDispatcher("login.html").include(request, response);
+                    
+                    }
+
+      out.write("            \n");
+      out.write("</table>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
