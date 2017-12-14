@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Constants.Constants;
 
+
 /**
  *
  * @author mats
@@ -39,17 +40,21 @@ public class PrintUtStudenter extends HttpServlet {
             String SQL = Constants.sqlWriteStudent;
             rs = st.executeQuery(SQL);
 
-
+            
+            
+            
       //STEP 5: Extract data from result set
       while(rs.next()){
          //Retrieve by column name
          
-         String fornavn = rs.getString("firstname");
-         String etternavn = rs.getString("lastname");
+         String firstname = rs.getString("firstname");
+         String lastname = rs.getString("lastname");
+         
+         
 
          //Display values
 
-         out.print(" Fornavn: " + fornavn + " Etternavn: " + etternavn);
+         out.print(" Fornavn: " + firstname + " Etternavn: " + lastname);
       }
         }   catch (SQLException ex) {
                 Logger.getLogger(PrintUtStudenter.class.getName()).log(Level.SEVERE, null, ex);

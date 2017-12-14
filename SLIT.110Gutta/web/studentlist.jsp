@@ -27,21 +27,12 @@
  
 <table border="2">
 <tr>
+<td>UserID</td>
 <td>Fornavn</td>
 <td>Etternavn</td>
 <td>Email</td>
-<td>Modul 1</td>
-<td>Modul 2</td>
-<td>Modul 3</td>
-<td>Modul 4</td>
-<td>Modul 5</td>
-<td>Modul 6</td>
-<td>Modul 7</td>
-<td>Modul 8</td>
-<td>Modul 9</td>
-<td>Modul 10</td>
-<td>Modul 11</td>
-<td>Modul 12</td>
+<td>Moduler</td>
+
  
  
 </tr>
@@ -52,34 +43,23 @@ Class.forName("com.mysql.jdbc.Driver");
 String url="jdbc:mysql://localhost:3306/slit";
 String username="root";
 String password="root";
-String query="SELECT * FROM user";
+String query="SELECT User.userid, User.firstname, User.lastname, User.email FROM user";
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
 ResultSet rs=stmt.executeQuery(query);
 while(rs.next())
 {
+    
  
-%>
-<tr>
-<td><%=rs.getString("fornavn") %></td>
-<td><%=rs.getString("etternavn") %></td>
-<td><%=rs.getString("email") %></td>
-<td><%=rs.getBlob(4).toString() %></td>
-<td><%=rs.getBlob(6) %></td>
-<td><%=rs.getBlob(8) %></td>
-<td><%=rs.getBlob("modul 4") %></td>
-<td><%=rs.getBlob("modul 5") %></td>
-<td><%=rs.getBlob("modul 6") %></td>
-<td><%=rs.getBlob("modul 7") %></td>
-<td><%=rs.getBlob("modul 8") %></td>
-<td><%=rs.getBlob("modul 9") %></td>
-<td><%=rs.getBlob("modul 10") %></td>
-<td><%=rs.getBlob("modul 11") %></td>
-<td><%=rs.getBlob("modul 12") %></td>
-
-
-</tr>
- <%
+    out.println("<tr>"
+        + "<td>"+rs.getString(1)+"</td>"
+        + "<td>"+rs.getString(2)+"</td>"
+        + "<td>"+rs.getString(3)+"</td>"
+        + "<td>"+rs.getString(4)+"</td>"
+        + "<td>"
+        + "<a href='foreleserinnleveringer.jsp?userid="+rs.getInt(1) +"'> Moduler </a>"
+        + "</td>"
+        + "</tr>");
  
 }
 %>

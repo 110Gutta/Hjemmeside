@@ -52,7 +52,7 @@ public final class tilbakemeldingForeleser_jsp extends org.apache.jasper.runtime
       out.write("<form action=\"tilbakemeldingServlet\" method=\"post\">  \n");
       out.write("module ID:<input type=\"text\" name=\"moduleid\"><br>  \n");
       out.write("Score:<input type=\"text\" name=\"score\"><br>\n");
-      out.write("Email:<input type=\"text\" name=\"email\"><br>\n");
+      out.write("UserID:<input type=\"text\" name=\"userid\"><br>\n");
       out.write("<input type=\"submit\" value=\"Give feedback\"> \n");
       out.write("</form>  \n");
       out.write("</html>");

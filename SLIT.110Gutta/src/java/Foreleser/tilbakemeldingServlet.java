@@ -36,11 +36,11 @@ public class tilbakemeldingServlet extends HttpServlet {
      * @param response
      * @throws ServletException
      * @throws IOException
+     * @throws java.sql.SQLException
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  
-                      throws ServletException, IOException {  
-            try {
+
+    protected void ProsessRequest(HttpServletRequest request, HttpServletResponse response)  
+                      throws ServletException, IOException, SQLException {  
                 response.setContentType("text/html;charset=UTF-8");
                 try (PrintWriter out = response.getWriter()) {
                     con = db.getCon();
@@ -53,19 +53,59 @@ public class tilbakemeldingServlet extends HttpServlet {
                     if(rs.next()){
                         String moduleid = rs.getString("moduleid");
                         String score = rs.getString("score");
-                        String email = rs.getString("email");
-                        st.executeUpdate("insert into module (moduleid, score, email) values('"+moduleid+"','"+score+"','"+email+"')");
+                        String userid = rs.getString("userid");
+                        st.executeUpdate("insert into module (moduleid, score, userid) values('"+moduleid+"','"+score+"','"+userid+"')");
                 out.println("Feedback given");
-                        out.println(moduleid + "\n");
-                        out.println(score);
-                        out.println(email);
+
                     } else{
                         out.print("Please login first");
                         request.getRequestDispatcher("login.html").include(request, response);
                     }
+                
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(tilbakemeldingServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -32,14 +32,13 @@
 
 session = request.getSession(false);
                     if(session!=null){
-            String userid = (String)session.getAttribute("userid");
+           
+                        String userid = (String)session.getAttribute("userid");
+                        
+                        String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
+  
+                        rs = st.executeQuery(query);
 
-        
-        
-  String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
-  rs = st.executeQuery(query);
-  
-  
   int count =0;
   while(rs.next())
   {
@@ -48,9 +47,6 @@ session = request.getSession(false);
         + "<td>"+rs.getString(2)+"</td>"
         + "<td>"+rs.getString(3)+"</td>"
         + "<td>"+rs.getString(4)+"</td>"
-    //    + "<td>"+rs.getString(5)+"</td>"
-      //  + "<td>"+rs.getString(3)+"</td>"
-     //   + "<td>"+rs.getString(4)+"</td>"
         + "<td>"
         + "<a href='download.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
         + "</td>"

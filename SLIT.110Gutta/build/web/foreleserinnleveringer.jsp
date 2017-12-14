@@ -32,13 +32,13 @@
 
 session = request.getSession(false);
                     if(session!=null){
-           
-                        String userid = (String)session.getAttribute("userid");
-                        
-                        String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
+ 
+        
+        String userid = request.getParameter("userid");
+  String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
+  rs = st.executeQuery(query);
   
-                        rs = st.executeQuery(query);
-
+  
   int count =0;
   while(rs.next())
   {

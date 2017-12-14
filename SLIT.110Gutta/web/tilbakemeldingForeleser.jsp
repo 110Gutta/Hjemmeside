@@ -9,7 +9,7 @@ and open the template in the editor.
 <form action="tilbakemeldingServlet" method="post">  
 module ID:<input type="text" name="moduleid"><br>  
 Score:<input type="text" name="score"><br>
-Email:<input type="text" name="email"><br>
+UserID:<input type="text" name="userid"><br>
 <input type="submit" value="Give feedback"> 
 </form>  
 </html>

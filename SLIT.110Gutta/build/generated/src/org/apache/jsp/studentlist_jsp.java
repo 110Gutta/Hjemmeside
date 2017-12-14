@@ -70,21 +70,12 @@ public final class studentlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write(" \n");
       out.write("<table border=\"2\">\n");
       out.write("<tr>\n");
+      out.write("<td>UserID</td>\n");
       out.write("<td>Fornavn</td>\n");
       out.write("<td>Etternavn</td>\n");
       out.write("<td>Email</td>\n");
-      out.write("<td>Modul 1</td>\n");
-      out.write("<td>Modul 2</td>\n");
-      out.write("<td>Modul 3</td>\n");
-      out.write("<td>Modul 4</td>\n");
-      out.write("<td>Modul 5</td>\n");
-      out.write("<td>Modul 6</td>\n");
-      out.write("<td>Modul 7</td>\n");
-      out.write("<td>Modul 8</td>\n");
-      out.write("<td>Modul 9</td>\n");
-      out.write("<td>Modul 10</td>\n");
-      out.write("<td>Modul 11</td>\n");
-      out.write("<td>Modul 12</td>\n");
+      out.write("<td>Moduler</td>\n");
+      out.write("\n");
       out.write(" \n");
       out.write(" \n");
       out.write("</tr>\n");
@@ -95,66 +86,23 @@ Class.forName("com.mysql.jdbc.Driver");
 String url="jdbc:mysql://localhost:3306/slit";
 String username="root";
 String password="root";
-String query="SELECT * FROM user";
+String query="SELECT User.userid, User.firstname, User.lastname, User.email FROM user";
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
 ResultSet rs=stmt.executeQuery(query);
 while(rs.next())
 {
+    
  
-
-      out.write("\n");
-      out.write("<tr>\n");
-      out.write("<td>");
-      out.print(rs.getString("fornavn") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getString("etternavn") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getString("email") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob(4).toString() );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob(6) );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob(8) );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 4") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 5") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 6") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 7") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 8") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 9") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 10") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 11") );
-      out.write("</td>\n");
-      out.write("<td>");
-      out.print(rs.getBlob("modul 12") );
-      out.write("</td>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("</tr>\n");
-      out.write(" ");
-
+    out.println("<tr>"
+        + "<td>"+rs.getString(1)+"</td>"
+        + "<td>"+rs.getString(2)+"</td>"
+        + "<td>"+rs.getString(3)+"</td>"
+        + "<td>"+rs.getString(4)+"</td>"
+        + "<td>"
+        + "<a href='foreleserinnleveringer.jsp?userid="+rs.getInt(1) +"'> Moduler </a>"
+        + "</td>"
+        + "</tr>");
  
 }
 
