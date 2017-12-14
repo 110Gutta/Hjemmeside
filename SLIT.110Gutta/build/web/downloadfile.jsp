@@ -18,7 +18,10 @@
     <th>Filnavn</th>
     <th>Filtype</th>
     <th>Opplastet</th>
+    <th>Tilbakemelding</th>
+    <th>Poengsum</th>
     <th>Last ned</th>
+
   </tr>
 <%
         DataBase db = new DataBase();
@@ -35,7 +38,7 @@ session = request.getSession(false);
            
                         String userid = (String)session.getAttribute("userid");
                         
-                        String query = "select moduleid,filename,typefile, uploadtime from Delivery where userid = " + userid;
+                        String query = "select Delivery.moduleid, Delivery.filename, Delivery.typefile, Delivery.uploadtime, Feedback.deliveryfeedback, Feedback.score  from Delivery INNER JOIN Feedback ON Delivery.userid = Feedback.userid AND Delivery.moduleid = Feedback.moduleid where Delivery.userid =" + userid;
   
                         rs = st.executeQuery(query);
 
@@ -47,6 +50,8 @@ session = request.getSession(false);
         + "<td>"+rs.getString(2)+"</td>"
         + "<td>"+rs.getString(3)+"</td>"
         + "<td>"+rs.getString(4)+"</td>"
+        + "<td>"+rs.getString(5)+"</td>"
+        + "<td>"+rs.getInt(6)+"</td>"
         + "<td>"
         + "<a href='download.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
         + "</td>"
