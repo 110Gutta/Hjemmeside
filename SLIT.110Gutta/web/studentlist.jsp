@@ -49,10 +49,10 @@
 try
 {
 Class.forName("com.mysql.jdbc.Driver");
-String url="jdbc:mysql://localhost:3306/prog";
+String url="jdbc:mysql://localhost:3306/slit";
 String username="root";
-String password="bjerk7412395";
-String query="SELECT * FROM bruker";
+String password="root";
+String query="SELECT * FROM user";
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
 ResultSet rs=stmt.executeQuery(query);
@@ -61,8 +61,8 @@ while(rs.next())
  
 %>
 <tr>
-<td><%=rs.getString("forNavn") %></td>
-<td><%=rs.getString("etterNavn") %></td>
+<td><%=rs.getString("fornavn") %></td>
+<td><%=rs.getString("etternavn") %></td>
 <td><%=rs.getString("email") %></td>
 <td><%=rs.getBlob(4).toString() %></td>
 <td><%=rs.getBlob(6) %></td>

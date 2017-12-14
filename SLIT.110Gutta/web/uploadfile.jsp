@@ -113,6 +113,6 @@
             con.close();
                     }
         %>
-        <a href="uploadhtml.jsp">Home Page</a>
+        <a href="uploadindex.jsp">Home Page</a>
     </body>
 </html>

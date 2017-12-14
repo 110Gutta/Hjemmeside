@@ -52,7 +52,7 @@ session = request.getSession(false);
       //  + "<td>"+rs.getString(3)+"</td>"
      //   + "<td>"+rs.getString(4)+"</td>"
         + "<td>"
-        + "<a href='downloadtest.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
+        + "<a href='download.jsp?moduleid="+rs.getInt(1) +"'> Download </a>"
         + "</td>"
         + "</tr>");
     count++;

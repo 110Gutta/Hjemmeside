@@ -18,7 +18,7 @@ public interface Constants {
     
     //////////////////////////////////////////////
     /////////            SQL            /////////
-    public static String sqlWriteStudent = "SELECT firstname, lastname, email from User";
+    public static String sqlWriteStudent = "SELECT User.firstname, User.lastname, User.email from User INNER JOIN Permission on User.adminid = Permission.adminid where User.adminid = 2";
     public static String sqlDeleteUser = "DELETE FROM User WHERE firstname = ? AND lastname = ?";
     public static String sqlSelectModule = "SELECT modulename, learninggoals, moduletext from Module";
     public static String sqlInsertIntoModule = "INSERT INTO module (modulename, learninggoals, moduletext, modulefile, moduleid) values (?, ?, ?, ?,?)";

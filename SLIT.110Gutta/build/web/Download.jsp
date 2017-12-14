@@ -1,56 +1,69 @@
 <%-- 
-    Document   : Download
-    Created on : Dec 4, 2017, 3:51:23 PM
-    Author     : nilsf
+    Document   : downloadtest
+    Created on : 13.des.2017, 15:33:43
+    Author     : mats, simen & nils
 --%>
-
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.Blob"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="DB.DataBase"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-	<title> SLIT-Project </title>
-	<meta name="viewport" content="width=device-width, minimumscale=
-	1.0, maximum-scale=1.0" />
-    </head>
+<%
     
-    <body>
+        DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
         
-        
-                  
-        <div id="container">
-            <header id="header">
-                <hgroup>
-                    <h1><a href="index.html" style="text-decoration:none">SLIT</a></h1>
-                     
-                </hgroup>
-            </header>
-            </div>
-        
-            <div id="content">
-		<article class="post">
-			<h2>Enter your information</h2>
-            <div class="form">
-                <form action="DownloadServletV2" method="POST" >
-                ModulNr: <input type="text" placeholder="modul nr" name="id" ></br>
-           
-                <input type="submit" value="Download" ></br>
-                
-               
-            </div>
-	
-      
-        </div>
-    
-          
-    </body>
-          
-
-</html>
-
-    
-         
-    </body>
-          
-
-</html>
+            con = db.getCon();
+            st = con.createStatement();
+  
+  String moduleid = request.getParameter("moduleid");
+  String query = "select filename, typefile, file from Delivery where moduleid = " + moduleid;
+  rs = st.executeQuery(query);
+  
+  
+  
+  
+  
+  rs.next();
+  
+  // clear the response header information.
+  response.reset();                        
+  // check the file type and set the header contentType accordingly..   
+  if(rs.getString(2)==".txt")
+  {
+      response.setContentType("application/octet-stream");
+  }
+  else if(rs.getString(2)==".pdf")
+  {
+      response.setContentType("application/pdf");
+  }
+  else if((rs.getString(2)==".doc")||rs.getString(2)==".docx")
+  {
+      response.setContentType("application/msword");
+  }
+  else if((rs.getString(2)==".xls")||(rs.getString(2)==".xlsx"))
+  {
+      response.setContentType("application/vnd.ms-excel");
+  }
+  // add header information to response object
+  response.addHeader("Content-Disposition","attachment; filename="+rs.getString(1));
+  // create the byte array from Blob
+  Blob blb = rs.getBlob(3);
+  byte[] bdata = blb.getBytes(1, (int) blb.length());
+  
+  // get the response Output stream object to write the content of the file into header
+  OutputStream output =  response.getOutputStream();
+  output.write(bdata);
+  output.close();
+  // close the obejct of ResultSet
+  rs.close();
+  
+  // close the connection object.. 
+  con.close();
+%>

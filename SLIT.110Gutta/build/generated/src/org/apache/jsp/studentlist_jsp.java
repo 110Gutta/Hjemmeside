@@ -92,10 +92,10 @@ public final class studentlist_jsp extends org.apache.jasper.runtime.HttpJspBase
 try
 {
 Class.forName("com.mysql.jdbc.Driver");
-String url="jdbc:mysql://localhost:3306/prog";
+String url="jdbc:mysql://localhost:3306/slit";
 String username="root";
-String password="bjerk7412395";
-String query="SELECT * FROM bruker";
+String password="root";
+String query="SELECT * FROM user";
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
 ResultSet rs=stmt.executeQuery(query);
@@ -106,10 +106,10 @@ while(rs.next())
       out.write("\n");
       out.write("<tr>\n");
       out.write("<td>");
-      out.print(rs.getString("forNavn") );
+      out.print(rs.getString("fornavn") );
       out.write("</td>\n");
       out.write("<td>");
-      out.print(rs.getString("etterNavn") );
+      out.print(rs.getString("etternavn") );
       out.write("</td>\n");
       out.write("<td>");
       out.print(rs.getString("email") );
