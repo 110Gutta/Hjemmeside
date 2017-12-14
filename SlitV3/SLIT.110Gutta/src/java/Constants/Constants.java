@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Constants;
+
+/**
+ *
+ * @author nilsf
+ */
+public interface Constants {
+    
+    //Admin password
+    public static String adminPWD = "123";
+    public static final String filesPath = System.getProperty("user.home");
+    
+    
+    //////////////////////////////////////////////
+    /////////            SQL            /////////
+    public static String sqlWriteStudent = "SELECT User.firstname, User.lastname, User.email from User INNER JOIN Permission on User.adminid = Permission.adminid where User.adminid = 2";
+    public static String sqlDeleteUser = "DELETE FROM User WHERE firstname = ? AND lastname = ?";
+    public static String sqlSelectModule = "SELECT modulename, learninggoals, moduletext from Module";
+    public static String sqlInsertIntoModule = "INSERT INTO module (modulename, learninggoals, moduletext, modulefile, moduleid) values (?, ?, ?, ?,?)";
+    public static String sqlSelectAllFromMuduleID = "SELECT * FROM module WHERE moduleid = ?";
+    public static String sqlInsertInnlevering = "INSERT INTO Delivery (email, moduleid, deliveryfile) values (?, ?, ?)";
+    public static String sqlDeleteModule = "DELETE FROM module WHERE moduleid = ?";
+    public static String sqlSelectFeedback = "INSERT INTO module (moduleid, score, email)";
+ 
+}
