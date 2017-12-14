@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Constants.Constants;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -51,6 +52,7 @@ public final class studentlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html\n");
       out.write("<html>\n");
       out.write("<head>\n");
@@ -80,16 +82,18 @@ public final class studentlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write(" \n");
       out.write("</tr>\n");
 
+    request.getRequestDispatcher("link.html");
 try
 {
 Class.forName("com.mysql.jdbc.Driver");
 String url="jdbc:mysql://localhost:3306/prog";
 String username="root";
 String password="root";
-String query="SELECT User.userid, User.firstname, User.lastname, User.email FROM user";
+String query= Constants.sqlWriteStudent;
 Connection conn=DriverManager.getConnection(url, username, password);
 Statement stmt=conn.createStatement();
 ResultSet rs=stmt.executeQuery(query);
+
 while(rs.next())
 {
     
@@ -109,12 +113,12 @@ while(rs.next())
       out.write("\n");
       out.write("</table>\n");
 
-rs.close();
-stmt.close();
-conn.close();
-}
-catch(Exception e)
-{
+        rs.close();
+        stmt.close();
+        conn.close();
+    }
+    catch(Exception e)
+    {
 e.printStackTrace();
 }
 

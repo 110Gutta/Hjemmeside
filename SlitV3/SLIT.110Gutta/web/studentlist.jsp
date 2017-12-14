@@ -4,6 +4,8 @@
     Author     : Simen Fredriksen
 --%>
  
+<%@page import="DB.DataBase"%>
+<%@page import="Constants.Constants"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -22,7 +24,6 @@
  
 </body>
  
- 
 <form method="post">
  
 <table border="2">
@@ -37,16 +38,20 @@
  
 </tr>
 <%
+    
 try
 {
-Class.forName("com.mysql.jdbc.Driver");
-String url="jdbc:mysql://localhost:3306/prog";
-String username="root";
-String password="root";
-String query="SELECT User.userid, User.firstname, User.lastname, User.email FROM user";
-Connection conn=DriverManager.getConnection(url, username, password);
-Statement stmt=conn.createStatement();
-ResultSet rs=stmt.executeQuery(query);
+        DataBase db = new DataBase();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        
+            con = db.getCon();
+            st = con.createStatement();
+            String query= Constants.sqlWriteStudent;
+
+            rs = st.executeQuery(query);
+
 while(rs.next())
 {
     
@@ -65,12 +70,12 @@ while(rs.next())
 %>
 </table>
 <%
-rs.close();
-stmt.close();
-conn.close();
-}
-catch(Exception e)
-{
+        rs.close();
+        st.close();
+        con.close();
+    }
+    catch(Exception e)
+    {
 e.printStackTrace();
 }
 %>

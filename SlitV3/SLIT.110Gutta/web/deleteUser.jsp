@@ -35,7 +35,7 @@
                 Fornavn: <input type="text" placeholder="Fornavn" name="fornavn" ></br>
                 Etternavn <input type="text" placeholder="Etternavn" name="etternavn" ></br>
            
-                <input type="submit" value="Slett" ></br>
+                <input type="submit" value="Delete" ></br>
                 
                
             </div>

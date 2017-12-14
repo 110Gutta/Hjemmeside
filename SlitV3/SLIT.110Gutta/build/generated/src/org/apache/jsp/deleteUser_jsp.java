@@ -74,7 +74,7 @@ public final class deleteUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                Fornavn: <input type=\"text\" placeholder=\"Fornavn\" name=\"fornavn\" ></br>\n");
       out.write("                Etternavn <input type=\"text\" placeholder=\"Etternavn\" name=\"etternavn\" ></br>\n");
       out.write("           \n");
-      out.write("                <input type=\"submit\" value=\"Slett\" ></br>\n");
+      out.write("                <input type=\"submit\" value=\"Delete\" ></br>\n");
       out.write("                \n");
       out.write("               \n");
       out.write("            </div>\n");

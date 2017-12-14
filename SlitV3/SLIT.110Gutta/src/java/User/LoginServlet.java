@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session=request.getSession();
                 String userid = rs.getString("userid");
                 
-               // String adminid = rs.getString("adminid");
+             
                 String userType = rs.getString("type");
 
                 session.setAttribute("email",email);

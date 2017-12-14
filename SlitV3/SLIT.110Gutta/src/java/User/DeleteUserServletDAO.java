@@ -45,7 +45,7 @@ public class DeleteUserServletDAO extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String fornavn = request.getParameter("fornavn");
-            String etternavn = request.getParameter("etternavn").trim();
+            String etternavn = request.getParameter("etternavn");
             
                 con = db.getCon();
 
